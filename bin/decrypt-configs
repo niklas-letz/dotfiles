@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+
+if ! command -v sops &> /dev/null; then
+  echo "Error: 'sops' is not installed or not in PATH." >&2
+  exit 1
+fi
+
+sops -d --input-type binary "$DOTFILES/.ssh/config.fraunhofer.enc" > "$HOME/.ssh/config.fraunhofer"
+sops -d --input-type binary "$DOTFILES/.gitconfig-fraunhofer.enc" > "$HOME/.gitconfig-fraunhofer"
+sops -d --input-type binary "$DOTFILES/.gitconfig-ventx.enc" > "$HOME/.gitconfig-ventx"
+
+echo "Generated: ~/.ssh/config.fraunhofer, ~/.gitconfig-fraunhofer, ~/.gitconfig-ventx"

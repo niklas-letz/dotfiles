@@ -1,0 +1,61 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "pwd": "allow",
+      "ls *": "allow",
+      "grep *": "allow",
+      "git *": "allow",
+      "git commit *": "deny",
+      "git push *": "deny"
+    }
+  },
+  "provider": {
+    "ollama": {
+      "name": "Ollama Local",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen3.6:35b-mlx": {
+          "name": "Qwen3.6-35B-MLX"
+        },
+        "gemma4:31b-mlx": {
+          "name": "gemma4-31B-MLX"
+        }
+      }
+    },
+    "fraunhofer": {
+      "name": "Fraunhofer",
+      "options": {
+        "baseURL": "{env:FRAUNHOFER_FHGENIE_API_URL}",
+        "apiKey": "{env:FRAUNHOFER_FHGENIE_API_KEY}"
+      },
+      "models": {
+        "Qwen/Qwen3-Coder-Next-FP8": {
+          "name": "Qwen3 Coder Next"
+        },
+        "MiniMaxAI/MiniMax-M2.5": {
+          "name": "MiniMax M2.5"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "kubernetes-mcp-server": {
+      "type": "local",
+      "command": ["npx", "-y", "kubernetes-mcp-server@latest"],
+      "enabled": true
+    },
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
