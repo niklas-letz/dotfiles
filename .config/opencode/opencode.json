@@ -47,7 +47,7 @@
     "kubernetes-mcp-server": {
       "type": "local",
       "command": ["npx", "-y", "kubernetes-mcp-server@latest"],
-      "enabled": true
+      "enabled": false
     },
     "github": {
       "type": "remote",
