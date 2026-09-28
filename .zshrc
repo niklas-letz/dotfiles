@@ -34,3 +34,10 @@ alias ll="ls -lah"
 
 # Decrypt and load secrets via SOPS
 eval "$(sops -d ~/.zsh_secrets.enc.env 2>/dev/null)"
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# .NET SDK
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$DOTNET_ROOT:$PATH"
