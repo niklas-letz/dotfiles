@@ -28,6 +28,7 @@
       }
     },
     "fraunhofer": {
+      "npm": "@ai-sdk/openai-compatible",
       "name": "Fraunhofer",
       "options": {
         "baseURL": "{env:FRAUNHOFER_FHGENIE_API_URL}",
