@@ -41,3 +41,21 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # .NET SDK
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$DOTNET_ROOT:$PATH"
+
+# GlobalProtect VPN: start/stop on demand (run vpn-off once to disable autostart)
+_gp_agents=(com.paloaltonetworks.gp.pangpa com.paloaltonetworks.gp.pangps)
+
+vpn-on() {
+  for l in $_gp_agents; do
+    launchctl enable gui/$UID/$l
+    launchctl bootstrap gui/$UID /Library/LaunchAgents/$l.plist 2>/dev/null
+    launchctl disable gui/$UID/$l   # keep running now, but don't autostart at next login
+  done
+}
+
+vpn-off() {
+  for l in $_gp_agents; do
+    launchctl bootout gui/$UID/$l 2>/dev/null
+    launchctl disable gui/$UID/$l
+  done
+}
